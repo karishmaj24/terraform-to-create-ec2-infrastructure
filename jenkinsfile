@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url:'https://github.com/karishmaj24/terraform-to-create-ec2-infrastructure.git'
+                    url: 'https://github.com/karishmaj24/terraform-to-create-ec2-infrastructure.git'
             }
         }
 
@@ -23,12 +23,11 @@ pipeline {
                     usernameVariable: 'DOCKER_USERNAME',
                     passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
-                    bat '''
-                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-                        docker push instantprachi/myapp:latest
-                    '''
+                    bat 'docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%'
+                    bat 'docker push instantprachi/myapp:latest'
                 }
             }
         }
     }
 }
+       
