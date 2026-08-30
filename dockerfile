@@ -1,5 +1,5 @@
-FROM alpine:latest
+FROM nginx:latest
 
-RUN echo "Terraform infrastructure project" > /project-info.txt
+COPY index.html /usr/share/nginx/html/index.html
 
-CMD ["cat", "/project-info.txt"]
+EXPOSE 80
