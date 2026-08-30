@@ -3,154 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My App</title>
+    <title>Cloud App</title>
 
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            height: 100vh;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        header {
+            background: #667eea;
+            color: white;
+            padding: 20px 50px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .login-box {
-            width: 350px;
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        header h1 {
+            font-size: 28px;
         }
 
-        .login-box h1 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .login-box p {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-top: 7px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 15px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 25px;
-            border: none;
-            border-radius: 7px;
-            background: #667eea;
+        nav a {
             color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #5568d9;
-        }
-
-        #message {
-            text-align: center;
-            margin-top: 15px;
+            text-decoration: none;
+            margin-left: 25px;
             font-weight: bold;
         }
 
-        .welcome {
-            display: none;
+        .hero {
             text-align: center;
+            padding: 70px 20px;
+            background: white;
         }
 
-        .logout {
-            background: #e74c3c;
+        .hero h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 280px;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="login-box" id="loginBox">
+    <header>
+        <h1>My Cloud App</h1>
 
-        <h1>My App</h1>
-        <p>Welcome! Please login to continue</p>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
 
-        <label>Username</label>
-        <input type="text" id="username" placeholder="Enter username">
+    <section class="hero">
+        <h2>Welcome to My Cloud App 🚀</h2>
+        <p>Deployed successfully using CI/CD Pipeline</p>
+    </section>
 
-        <label>Password</label>
-        <input type="password" id="password" placeholder="Enter password">
+    <div class="container" id="services">
 
-        <button onclick="login()">Login</button>
+        <div class="cards">
 
-        <div id="message"></div>
+            <div class="card">
+                <h3>☁️ Cloud</h3>
+                <p>
+                    Application hosted on cloud infrastructure
+                    using Docker and Jenkins.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🐳 Docker</h3>
+                <p>
+                    Application is containerized using
+                    Docker for easy deployment.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>⚙️ CI/CD</h3>
+                <p>
+                    Jenkins automatically builds, pushes
+                    and deploys the application.
+                </p>
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="login-box welcome" id="welcomeBox">
-
-        <h1>Welcome 🎉</h1>
-
-        <p id="welcomeMessage"></p>
-
-        <button class="logout" onclick="logout()">Logout</button>
-
-    </div>
-
-    <script>
-
-        function login() {
-
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            let message = document.getElementById("message");
-
-            if (username === "admin" && password === "admin123") {
-
-                document.getElementById("loginBox").style.display = "none";
-                document.getElementById("welcomeBox").style.display = "block";
-
-                document.getElementById("welcomeMessage").innerHTML =
-                    "Hello <b>" + username + "</b>!<br>You are successfully logged in.";
-
-            } else {
-
-                message.innerHTML = "Invalid username or password!";
-                message.style.color = "red";
-
-            }
-        }
-
-        function logout() {
-
-            document.getElementById("welcomeBox").style.display = "none";
-            document.getElementById("loginBox").style.display = "block";
-
-            document.getElementById("username").value = "";
-            document.getElementById("password").value = "";
-            document.getElementById("message").innerHTML = "";
-        }
-
-    </script>
+    <footer id="about">
+        <p>My Cloud App | CI/CD Project</p>
+    </footer>
 
 </body>
 </html>
