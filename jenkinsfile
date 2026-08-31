@@ -1,45 +1,58 @@
-pipeline {
-    agent any
-
-    stages {
-
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/karishmaj24/terraform-to-create-ec2-infrastructure.git'
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build --no-cache -t karisheyy/myapp:latest .'
-            }
-        }
-
-        stage('Push to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-credentials',
-                    usernameVariable: 'DOCKER_USERNAME',
-                    passwordVariable: 'DOCKER_PASSWORD'
-                )]) {
-                    sh '''
-                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-                        docker push karisheyy/myapp:latest
-                        docker logout
-                    '''
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh '''
-                    docker rm -f myapp 2>/dev/null || true
-                    docker pull karisheyy/myapp:latest
-                    docker run -d --name myapp -p 80:80 karisheyy/myapp:latest
-                '''
-            }
-        }
-    }
+pipeline { 
+    agent any 
+ 
+    environment { 
+        IMAGE_NAME = 'karisheyy/karisheyy'
+        DOCKER_HUB_CREDENTIALS = 'dockerhub' 
+    } 
+ 
+    stages { 
+ 
+        stage('Clone Repository') { 
+            steps { 
+                git branch: 'main', 
+                    url: 'https://github.com/karishmaj24/terraform-to-create-ec2-infrastructure.git' 
+            } 
+        } 
+ 
+        stage('Build Docker Image') { 
+            steps { 
+                sh 'docker build -t $IMAGE_NAME .' 
+            } 
+        } 
+ 
+        stage('Push to Docker Hub') { 
+            steps { 
+                withCredentials([ 
+                    usernamePassword( 
+                        credentialsId: "${DOCKER_HUB_CREDENTIALS}", 
+                        usernameVariable: 'USERNAME', 
+                        passwordVariable: 'PASSWORD' 
+                    ) 
+                ]) { 
+                    sh ''' 
+                        echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin 
+                        docker push $IMAGE_NAME 
+                        docker logout 
+                    ''' 
+                } 
+            } 
+        } 
+ 
+        stage('Run Docker Container') { 
+            steps { 
+                sh 'docker run -d -p 80:80 --name webapp $IMAGE_NAME || echo "Container may already be running"' 
+            } 
+        } 
+    } 
+ 
+    post { 
+        success { 
+            echo "✅ Build, push, and deploy completed successfully!" 
+        } 
+ 
+        failure { 
+            echo "❌ Build or deploy failed. Please check the logs." 
+        } 
+    } 
 }
