@@ -4,307 +4,429 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CloudDeploy | CI/CD Dashboard</title>
+    <title>CloudDeploy | CI/CD Platform</title>
 
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1f2937;
+            background: #f5f7fb;
+            color: #172033;
         }
 
         /* NAVBAR */
-        .navbar {
-            height: 72px;
-            background: #111827;
-            color: white;
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+            background: #101828;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 35px;
+            padding: 0 7%;
+            color: white;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            font-size: 24px;
+            font-size: 25px;
             font-weight: bold;
         }
 
-        .logo-icon {
-            width: 42px;
-            height: 42px;
-            background: #4f46e5;
-            border-radius: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        .logo span {
+            color: #38bdf8;
         }
 
-        .status {
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav ul li a:hover {
+            color: #38bdf8;
+        }
+
+        .online {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             font-size: 14px;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            background: #22c55e;
+        .green-dot {
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+            background: #22c55e;
         }
 
-        /* MAIN */
-        .container {
-            max-width: 1200px;
-            margin: 35px auto;
-            padding: 0 20px;
+        /* HERO */
+
+        .hero {
+            min-height: 600px;
+            padding: 90px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            background: linear-gradient(135deg, #eef7ff, #ffffff);
         }
 
-        .welcome {
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 9px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #667085;
             margin-bottom: 30px;
         }
 
-        .welcome h1 {
-            margin: 0 0 8px;
-            font-size: 32px;
+        .buttons {
+            display: flex;
+            gap: 15px;
         }
 
-        .welcome p {
-            margin: 0;
-            color: #6b7280;
+        .btn {
+            padding: 14px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
         }
 
-        /* CARDS */
+        .primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .secondary {
+            background: white;
+            color: #2563eb;
+            border: 1px solid #2563eb;
+        }
+
+        /* PIPELINE VISUAL */
+
+        .pipeline-box {
+            width: 480px;
+            background: #101828;
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .pipeline-box h2 {
+            margin-bottom: 25px;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: #1d2939;
+            border-radius: 10px;
+        }
+
+        .pipeline-icon {
+            width: 42px;
+            height: 42px;
+            background: #2563eb;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .pipeline-step small {
+            color: #98a2b3;
+        }
+
+        /* GENERAL */
+
+        section {
+            padding: 80px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #667085;
+        }
+
+        /* PIPELINE CARDS */
+
         .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+        }
+
+        .card-number {
+            font-size: 14px;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        /* STATUS */
+
+        .status-section {
+            background: #101828;
+            color: white;
+        }
+
+        .status-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
 
-        .card {
-            background: white;
-            padding: 25px;
+        .status-card {
+            background: #1d2939;
+            padding: 28px;
             border-radius: 14px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: 0.2s;
         }
 
-        .card:hover {
-            transform: translateY(-3px);
-        }
-
-        .card h3 {
-            margin: 0 0 15px;
-            color: #6b7280;
+        .status-card h3 {
+            color: #98a2b3;
+            margin-bottom: 15px;
             font-size: 15px;
         }
 
-        .value {
-            font-size: 21px;
+        .status-value {
+            font-size: 22px;
             font-weight: bold;
-        }
-
-        .running {
-            color: #16a34a;
         }
 
         .success {
-            color: #16a34a;
-            font-weight: bold;
+            color: #22c55e;
         }
 
         /* DEPLOYMENT */
-        .section {
-            margin-top: 30px;
-            background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .section h2 {
-            margin-top: 0;
-        }
 
         .deployment {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .deployment p {
-            color: #6b7280;
-            margin-bottom: 0;
-        }
-
-        .live-badge {
-            background: #dcfce7;
-            color: #15803d;
-            padding: 7px 13px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        /* BUTTON */
-        .deploy-btn {
-            margin-top: 20px;
-            padding: 13px 25px;
-            border: none;
-            border-radius: 8px;
-            background: #4f46e5;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .deploy-btn:hover {
-            background: #3730a3;
-        }
-
-        .deploy-btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        #deployMessage {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        /* TWO COLUMNS */
-        .activity {
-            margin-top: 30px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .activity-box {
+            max-width: 1000px;
+            margin: auto;
             background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.07);
         }
 
-        .activity-box h3 {
-            margin-top: 0;
-        }
-
-        .item {
-            padding: 14px 0;
-            border-bottom: 1px solid #eee;
+        .deployment-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .item:last-child {
-            border-bottom: none;
+            margin-bottom: 30px;
         }
 
         .badge {
             background: #dcfce7;
             color: #15803d;
-            padding: 5px 10px;
+            padding: 8px 15px;
             border-radius: 20px;
-            font-size: 12px;
             font-weight: bold;
         }
 
-        /* PIPELINE */
-        .info {
-            margin-top: 30px;
-            background: #111827;
-            color: white;
-            padding: 25px;
-            border-radius: 14px;
-        }
-
-        .info h2 {
-            margin-top: 0;
-        }
-
-        .pipeline {
+        .deployment-info {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
-        .pipeline-step {
-            padding: 18px;
+        .info {
+            background: #f8fafc;
+            padding: 20px;
             border-radius: 10px;
-            background: #1f2937;
+        }
+
+        .info span {
+            display: block;
+            color: #667085;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .info strong {
+            font-size: 16px;
+        }
+
+        /* HISTORY */
+
+        .history {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .history-item {
+            background: white;
+            padding: 22px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* ABOUT */
+
+        .about {
+            background: #eef6ff;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: auto;
             text-align: center;
         }
 
-        .pipeline-icon {
-            font-size: 25px;
+        .about-content p {
+            color: #667085;
+            line-height: 1.8;
+            font-size: 17px;
         }
 
-        .pipeline-step strong {
-            display: block;
-            margin-top: 8px;
+        /* DEPLOY BUTTON */
+
+        .deploy-area {
+            text-align: center;
+            margin-top: 35px;
         }
 
-        .pipeline-step span {
-            display: block;
-            margin-top: 8px;
-            color: #86efac;
-            font-size: 13px;
+        #message {
+            margin-top: 18px;
+            font-weight: bold;
         }
 
         /* FOOTER */
+
         footer {
+            background: #101828;
+            color: #98a2b3;
             text-align: center;
             padding: 30px;
-            color: #6b7280;
+        }
+
+        footer strong {
+            color: white;
         }
 
         /* RESPONSIVE */
-        @media (max-width: 900px) {
+
+        @media(max-width: 900px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .pipeline-box {
+                width: 100%;
+            }
+
             .cards {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .pipeline {
+            .status-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 600px) {
-            .cards,
-            .activity,
-            .pipeline {
-                grid-template-columns: 1fr;
-            }
+        @media(max-width: 600px) {
 
-            .navbar {
-                padding: 0 15px;
-            }
-
-            .navbar .status {
+            nav ul {
                 display: none;
             }
 
-            .deployment {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .cards,
+            .status-grid,
+            .deployment-info {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -314,420 +436,424 @@
 
 <!-- NAVBAR -->
 
-<nav class="navbar">
+<nav>
 
     <div class="logo">
-
-        <div class="logo-icon">
-            ☁
-        </div>
-
-        <span>CloudDeploy</span>
-
+        ☁️ Cloud<span>Deploy</span>
     </div>
 
-    <div class="status">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#pipeline">Pipeline</a></li>
+        <li><a href="#infrastructure">Infrastructure</a></li>
+        <li><a href="#deployment">Deployment</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
 
-        <span class="dot"></span>
-
+    <div class="online">
+        <span class="green-dot"></span>
         System Online
-
     </div>
 
 </nav>
 
 
-<!-- MAIN -->
+<!-- HERO -->
 
-<main class="container">
+<section class="hero" id="home">
 
+    <div class="hero-content">
 
-    <!-- WELCOME -->
+        <div class="tag">
+            🚀 REAL-WORLD DEVOPS PROJECT
+        </div>
 
-    <div class="welcome">
-
-        <h1>Cloud Deployment Dashboard</h1>
+        <h1>
+            Automate.<br>
+            Build.<br>
+            <span>Deploy.</span>
+        </h1>
 
         <p>
-            Monitor your application, infrastructure and CI/CD pipeline.
+            CloudDeploy is an automated CI/CD platform that
+            builds, tests and deploys web applications using
+            GitHub, Jenkins, Docker, Docker Hub and AWS EC2.
+        </p>
+
+        <div class="buttons">
+            <a href="#pipeline" class="btn primary">
+                View Pipeline
+            </a>
+
+            <a href="#deployment" class="btn secondary">
+                View Deployment
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="pipeline-box">
+
+        <h2>⚡ CI/CD Pipeline</h2>
+
+        <div class="pipeline-step">
+            <div class="pipeline-icon">🔗</div>
+            <div>
+                <strong>GitHub</strong><br>
+                <small>Source Code</small>
+            </div>
+        </div>
+
+        <div class="pipeline-step">
+            <div class="pipeline-icon">⚙️</div>
+            <div>
+                <strong>Jenkins</strong><br>
+                <small>Automated Build</small>
+            </div>
+        </div>
+
+        <div class="pipeline-step">
+            <div class="pipeline-icon">🐳</div>
+            <div>
+                <strong>Docker</strong><br>
+                <small>Container Build</small>
+            </div>
+        </div>
+
+        <div class="pipeline-step">
+            <div class="pipeline-icon">📦</div>
+            <div>
+                <strong>Docker Hub</strong><br>
+                <small>Image Repository</small>
+            </div>
+        </div>
+
+        <div class="pipeline-step">
+            <div class="pipeline-icon">☁️</div>
+            <div>
+                <strong>AWS EC2</strong><br>
+                <small>Production Deployment</small>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PIPELINE -->
+
+<section id="pipeline">
+
+    <div class="section-title">
+
+        <h2>How Our CI/CD Pipeline Works</h2>
+
+        <p>
+            From code commit to live application
         </p>
 
     </div>
 
 
-    <!-- STATUS CARDS -->
-
     <div class="cards">
 
-
         <div class="card">
-
-            <h3>AWS EC2</h3>
-
-            <div class="value running">
-                ● Running
-            </div>
-
+            <div class="card-number">01</div>
+            <div class="card-icon">🔗</div>
+            <h3>GitHub</h3>
+            <p>
+                Developers push application source code
+                to the GitHub repository.
+            </p>
         </div>
 
 
         <div class="card">
-
-            <h3>Docker</h3>
-
-            <div class="value running">
-                ● Running
-            </div>
-
+            <div class="card-number">02</div>
+            <div class="card-icon">🔔</div>
+            <h3>Webhook</h3>
+            <p>
+                GitHub Webhook automatically triggers
+                the Jenkins pipeline after a code push.
+            </p>
         </div>
 
 
         <div class="card">
-
+            <div class="card-number">03</div>
+            <div class="card-icon">⚙️</div>
             <h3>Jenkins</h3>
+            <p>
+                Jenkins checks out the latest source code
+                and starts the automated pipeline.
+            </p>
+        </div>
 
-            <div class="value running">
+
+        <div class="card">
+            <div class="card-number">04</div>
+            <div class="card-icon">🐳</div>
+            <h3>Docker Build</h3>
+            <p>
+                Jenkins builds a Docker image containing
+                the web application.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="card-number">05</div>
+            <div class="card-icon">📦</div>
+            <h3>Docker Hub</h3>
+            <p>
+                The generated Docker image is pushed to
+                Docker Hub for deployment.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="card-number">06</div>
+            <div class="card-icon">☁️</div>
+            <h3>AWS EC2</h3>
+            <p>
+                The Docker container runs on AWS EC2 and
+                makes the application available online.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INFRASTRUCTURE -->
+
+<section class="status-section" id="infrastructure">
+
+    <div class="section-title">
+
+        <h2>Infrastructure Status</h2>
+
+        <p>
+            Real-time deployment environment
+        </p>
+
+    </div>
+
+
+    <div class="status-grid">
+
+        <div class="status-card">
+            <h3>AWS EC2</h3>
+            <div class="status-value success">
+                ● Running
+            </div>
+        </div>
+
+        <div class="status-card">
+            <h3>Docker</h3>
+            <div class="status-value success">
+                ● Running
+            </div>
+        </div>
+
+        <div class="status-card">
+            <h3>Jenkins</h3>
+            <div class="status-value success">
                 ● Connected
             </div>
-
         </div>
 
-
-        <div class="card">
-
-            <h3>Latest Build</h3>
-
-            <div class="value success">
-                SUCCESS
+        <div class="status-card">
+            <h3>Deployment</h3>
+            <div class="status-value success">
+                ● SUCCESS
             </div>
-
         </div>
 
+    </div>
+
+</section>
+
+
+<!-- DEPLOYMENT -->
+
+<section id="deployment">
+
+    <div class="section-title">
+
+        <h2>Latest Deployment</h2>
+
+        <p>
+            Production deployment information
+        </p>
 
     </div>
 
 
-    <!-- LATEST DEPLOYMENT -->
+    <div class="deployment">
 
-    <div class="section">
-
-        <h2>🚀 Latest Deployment</h2>
-
-
-        <div class="deployment">
+        <div class="deployment-header">
 
             <div>
-
-                <strong>
-                    CloudDeploy Application
-                </strong>
-
-                <p>
-                    Docker Image:
-                    karisheyy/karisheyy:latest
-                </p>
-
+                <h2>🚀 CloudDeploy Application</h2>
+                <p>Production Environment</p>
             </div>
 
-
-            <div class="live-badge">
-                ✓ LIVE
+            <div class="badge">
+                ✓ SUCCESS
             </div>
 
         </div>
 
 
-        <button
-            class="deploy-btn"
-            id="deployButton"
-            onclick="deploy()"
-        >
-            🚀 Deploy Now
-        </button>
+        <div class="deployment-info">
 
-
-        <p id="deployMessage"></p>
-
-
-    </div>
-
-
-    <!-- ACTIVITY -->
-
-    <div class="activity">
-
-
-        <!-- CI/CD -->
-
-        <div class="activity-box">
-
-            <h3>🔄 CI/CD Pipeline</h3>
-
-
-            <div class="item">
-
-                <span>
-                    GitHub Repository
-                </span>
-
-                <span class="badge">
-                    CONNECTED
-                </span>
-
+            <div class="info">
+                <span>Docker Image</span>
+                <strong>karisheyy/karisheyy:latest</strong>
             </div>
 
-
-            <div class="item">
-
-                <span>
-                    Jenkins Build
-                </span>
-
-                <span class="badge">
-                    SUCCESS
-                </span>
-
+            <div class="info">
+                <span>Environment</span>
+                <strong>Production</strong>
             </div>
 
-
-            <div class="item">
-
-                <span>
-                    Docker Build
-                </span>
-
-                <span class="badge">
-                    SUCCESS
-                </span>
-
+            <div class="info">
+                <span>Platform</span>
+                <strong>AWS EC2</strong>
             </div>
 
-
-            <div class="item">
-
-                <span>
-                    Docker Hub Push
-                </span>
-
-                <span class="badge">
-                    SUCCESS
-                </span>
-
+            <div class="info">
+                <span>Web Server</span>
+                <strong>Nginx</strong>
             </div>
-
 
         </div>
 
 
-        <!-- DEPLOYMENT HISTORY -->
+        <div class="deploy-area">
 
-        <div class="activity-box">
+            <button class="btn primary" onclick="deploy()">
+                🚀 Deploy Application
+            </button>
 
-            <h3>📋 Deployment History</h3>
-
-
-            <div class="item">
-
-                <span>
-                    Version v1.0.3
-                </span>
-
-                <span class="badge">
-                    SUCCESS
-                </span>
-
-            </div>
-
-
-            <div class="item">
-
-                <span>
-                    Version v1.0.2
-                </span>
-
-                <span class="badge">
-                    SUCCESS
-                </span>
-
-            </div>
-
-
-            <div class="item">
-
-                <span>
-                    Version v1.0.1
-                </span>
-
-                <span class="badge">
-                    SUCCESS
-                </span>
-
-            </div>
-
-
-            <div class="item">
-
-                <span>
-                    Current Version
-                </span>
-
-                <span class="badge">
-                    LIVE
-                </span>
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-    <!-- PIPELINE -->
-
-    <div class="info">
-
-        <h2>⚙️ Deployment Pipeline</h2>
-
-
-        <div class="pipeline">
-
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    📂
-                </div>
-
-                <strong>
-                    GitHub
-                </strong>
-
-                <span>
-                    ✓ Connected
-                </span>
-
-            </div>
-
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    🔨
-                </div>
-
-                <strong>
-                    Jenkins
-                </strong>
-
-                <span>
-                    ✓ Build Success
-                </span>
-
-            </div>
-
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    🐳
-                </div>
-
-                <strong>
-                    Docker
-                </strong>
-
-                <span>
-                    ✓ Image Ready
-                </span>
-
-            </div>
-
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    ☁️
-                </div>
-
-                <strong>
-                    AWS EC2
-                </strong>
-
-                <span>
-                    ✓ Deployed
-                </span>
-
-            </div>
-
+            <div id="message"></div>
 
         </div>
 
     </div>
 
+</section>
 
-</main>
+
+<!-- HISTORY -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Deployment History</h2>
+
+        <p>
+            Previous successful releases
+        </p>
+
+    </div>
+
+
+    <div class="history">
+
+        <div class="history-item">
+            <strong>Version v1.0.3</strong>
+            <span class="success">✓ SUCCESS</span>
+        </div>
+
+        <div class="history-item">
+            <strong>Version v1.0.2</strong>
+            <span class="success">✓ SUCCESS</span>
+        </div>
+
+        <div class="history-item">
+            <strong>Version v1.0.1</strong>
+            <span class="success">✓ SUCCESS</span>
+        </div>
+
+        <div class="history-item">
+            <strong>Current Version</strong>
+            <span class="success">● LIVE</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+    <div class="about-content">
+
+        <div class="section-title">
+
+            <h2>About CloudDeploy</h2>
+
+        </div>
+
+        <p>
+            CloudDeploy is a real-world DevOps project designed
+            to demonstrate an automated CI/CD workflow for web
+            applications. The project integrates GitHub,
+            Jenkins, Docker, Docker Hub, Terraform and AWS EC2.
+            GitHub Webhook automatically triggers Jenkins,
+            Jenkins builds the Docker image, and the application
+            is deployed as a Docker container on AWS EC2.
+        </p>
+
+    </div>
+
+</section>
 
 
 <!-- FOOTER -->
 
 <footer>
 
-    CloudDeploy © 2026
-    |
-    AWS EC2 • Docker • Jenkins • GitHub
+    <strong>CloudDeploy</strong> © 2026
+
+    <br><br>
+
+    GitHub • Jenkins • Docker • Docker Hub • Terraform • AWS EC2
 
 </footer>
 
-
-<!-- JAVASCRIPT -->
 
 <script>
 
 function deploy() {
 
-    const button =
-        document.getElementById("deployButton");
+    const message = document.getElementById("message");
 
-    const message =
-        document.getElementById("deployMessage");
+    message.innerHTML = "⏳ Deployment pipeline started...";
 
+    message.style.color = "#2563eb";
 
-    button.disabled = true;
-
-    button.innerHTML =
-        "⏳ Deploying...";
-
-
-    message.style.color =
-        "#4f46e5";
-
-    message.innerHTML =
-        "Deployment is in progress...";
-
-
-    setTimeout(function () {
-
-        message.style.color =
-            "#16a34a";
+    setTimeout(function() {
 
         message.innerHTML =
-            "✅ Deployment completed successfully!";
+            "✓ Deployment completed successfully!";
 
-
-        button.disabled = false;
-
-        button.innerHTML =
-            "🚀 Deploy Again";
-
+        message.style.color = "#16a34a";
 
     }, 2500);
 
 }
 
 </script>
-
 
 </body>
 </html>
