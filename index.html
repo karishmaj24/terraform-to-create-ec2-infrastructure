@@ -1,165 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<title>Cloud App</title>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            min-height: 100vh;
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        .navbar {
-            background: white;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+}
 
-        .navbar h2 {
-            margin: 0;
-            color: #667eea;
-        }
+/* Navbar */
+nav {
+    background: #2c3e50;
+    padding: 15px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
 
-        .navbar a {
-            text-decoration: none;
-            margin-left: 25px;
-            color: #333;
-            font-weight: bold;
-        }
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 20px;
-        }
+.nav-links button {
+    background: transparent;
+    color: white;
+    border: none;
+    margin-left: 15px;
+    font-size: 15px;
+    cursor: pointer;
+}
 
-        .welcome {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-        }
+.nav-links button:hover {
+    text-decoration: underline;
+}
 
-        .welcome h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
+/* Pages */
+.page {
+    display: none;
+    padding: 60px 10%;
+    min-height: calc(100vh - 65px);
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-        }
+.page.active {
+    display: block;
+}
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
+/* Home */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+}
 
-        .card h2 {
-            color: #667eea;
-        }
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
 
-        .card p {
-            color: #666;
-            line-height: 1.5;
-        }
+.hero p {
+    font-size: 18px;
+    color: #555;
+}
 
-        .button {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 25px;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
+.btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
 
-        footer {
-            text-align: center;
-            color: white;
-            margin-top: 40px;
-        }
-    </style>
+.btn:hover {
+    background: #2980b9;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    width: 260px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.status {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: #d4edda;
+    color: #155724;
+    font-weight: bold;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="navbar">
-        <h2>☁️ CloudApp</h2>
+<nav>
+    <div class="logo">☁ Cloud App</div>
 
-        <div>
-            <a href="#">Home</a>
-            <a href="#">Services</a>
-            <a href="#">About</a>
-        </div>
+    <div class="nav-links">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('cloud')">Cloud</button>
+        <button onclick="showPage('cicd')">CI/CD</button>
+        <button onclick="showPage('docker')">Docker</button>
+        <button onclick="showPage('dashboard')">Dashboard</button>
+    </div>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+    <div class="hero">
+        <h1>Welcome to Cloud App 🚀</h1>
+        <p>My CI/CD Project using Jenkins, Docker and GitHub</p>
+
+        <button class="btn" onclick="showPage('dashboard')">
+            Open Dashboard
+        </button>
     </div>
 
-    <div class="container">
+    <div class="cards">
 
-        <div class="welcome">
-            <h1>Welcome to CloudApp 🚀</h1>
-            <p>Your application is successfully running!</p>
+        <div class="card" onclick="showPage('cloud')">
+            <h2>☁ Cloud</h2>
+            <p>Explore cloud infrastructure and services.</p>
         </div>
 
-        <div class="cards">
-
-            <div class="card">
-                <h2>☁️ Cloud</h2>
-                <p>
-                    Access your cloud application
-                    anytime and anywhere.
-                </p>
-                <a href="#" class="button">Explore</a>
-            </div>
-
-            <div class="card">
-                <h2>🚀 CI/CD</h2>
-                <p>
-                    Automatically build, push and
-                    deploy your application.
-                </p>
-                <a href="#" class="button">View Pipeline</a>
-            </div>
-
-            <div class="card">
-                <h2>🐳 Docker</h2>
-                <p>
-                    Application is containerized
-                    using Docker technology.
-                </p>
-                <a href="#" class="button">View App</a>
-            </div>
-
-            <div class="card">
-                <h2>⚡ Deployment</h2>
-                <p>
-                    Your latest version is deployed
-                    successfully.
-                </p>
-                <a href="#" class="button">Check Status</a>
-            </div>
-
+        <div class="card" onclick="showPage('cicd')">
+            <h2>🚀 CI/CD</h2>
+            <p>Automated build and deployment pipeline.</p>
         </div>
 
-        <footer>
-            <p>CloudApp | Powered by Docker + Jenkins CI/CD</p>
-        </footer>
+        <div class="card" onclick="showPage('docker')">
+            <h2>🐳 Docker</h2>
+            <p>Application running inside a Docker container.</p>
+        </div>
 
     </div>
+</div>
+
+<!-- CLOUD -->
+<div id="cloud" class="page">
+    <h1>☁ Cloud Services</h1>
+
+    <div class="cards">
+        <div class="card">
+            <h2>Compute</h2>
+            <p>Application hosted on cloud infrastructure.</p>
+        </div>
+
+        <div class="card">
+            <h2>Storage</h2>
+            <p>Cloud-based storage for application data.</p>
+        </div>
+
+        <div class="card">
+            <h2>Networking</h2>
+            <p>Public access through server networking.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CICD -->
+<div id="cicd" class="page">
+    <h1>🚀 CI/CD Pipeline</h1>
+
+    <div class="cards">
+        <div class="card">
+            <h2>1. GitHub</h2>
+            <p>Source code stored in GitHub repository.</p>
+        </div>
+
+        <div class="card">
+            <h2>2. Jenkins</h2>
+            <p>Automatically builds the application.</p>
+        </div>
+
+        <div class="card">
+            <h2>3. Docker</h2>
+            <p>Creates and runs the Docker container.</p>
+        </div>
+
+        <div class="card">
+            <h2>4. Deployment</h2>
+            <p>Application deployed to the server.</p>
+        </div>
+    </div>
+</div>
+
+<!-- DOCKER -->
+<div id="docker" class="page">
+    <h1>🐳 Docker Container</h1>
+
+    <div class="card">
+        <h2>Application Status</h2>
+        <p class="status">● RUNNING</p>
+
+        <p>
+            The Cloud App is running inside a Docker container
+            and deployed using Jenkins CI/CD.
+        </p>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="page">
+
+    <h1>📊 Application Dashboard</h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>Application</h2>
+            <p class="status">RUNNING</p>
+        </div>
+
+        <div class="card">
+            <h2>CI/CD</h2>
+            <p class="status">SUCCESS</p>
+        </div>
+
+        <div class="card">
+            <h2>Docker</h2>
+            <p class="status">ACTIVE</p>
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="showPage('home')">
+        ← Back to Home
+    </button>
+
+</div>
+
+<script>
+function showPage(pageId) {
+
+    const pages = document.querySelectorAll('.page');
+
+    pages.forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+}
+</script>
 
 </body>
 </html>
