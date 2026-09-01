@@ -1,0 +1,16 @@
+services:
+
+  frontend:
+    image: karisheyy/karisheyy:latest
+    container_name: clouddeploy-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    container_name: clouddeploy-backend
+    ports:
+      - "5000:5000"
