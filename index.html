@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud App</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            color: #667eea;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            margin-left: 25px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .welcome h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            color: #667eea;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>☁️ CloudApp</h2>
+
+        <div>
+            <a href="#">Home</a>
+            <a href="#">Services</a>
+            <a href="#">About</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="welcome">
+            <h1>Welcome to CloudApp 🚀</h1>
+            <p>Your application is successfully running!</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>☁️ Cloud</h2>
+                <p>
+                    Access your cloud application
+                    anytime and anywhere.
+                </p>
+                <a href="#" class="button">Explore</a>
+            </div>
+
+            <div class="card">
+                <h2>🚀 CI/CD</h2>
+                <p>
+                    Automatically build, push and
+                    deploy your application.
+                </p>
+                <a href="#" class="button">View Pipeline</a>
+            </div>
+
+            <div class="card">
+                <h2>🐳 Docker</h2>
+                <p>
+                    Application is containerized
+                    using Docker technology.
+                </p>
+                <a href="#" class="button">View App</a>
+            </div>
+
+            <div class="card">
+                <h2>⚡ Deployment</h2>
+                <p>
+                    Your latest version is deployed
+                    successfully.
+                </p>
+                <a href="#" class="button">Check Status</a>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>CloudApp | Powered by Docker + Jenkins CI/CD</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
